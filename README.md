@@ -68,5 +68,5 @@ This should run out of the box, but can be ammended should the need arise.
 This will automatically download the required software, i.e. GeoServer, GeoFence along with the dependencies based on the download URLs provided in the docker-compose.yml `ags` subsection per service.
 
 ##### Additional help:
-- [Geoserver](http://docs.geoserver.org/)
-- [Geofence](https://github.com/geoserver/geofence/wiki)
+- [GeoServer](http://docs.geoserver.org/)
+- [GeoFence](https://github.com/geoserver/geofence/wiki)
