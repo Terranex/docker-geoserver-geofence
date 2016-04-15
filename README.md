@@ -49,7 +49,7 @@ psql -U geofence
 Now run `SELECT PostGIS_Version();` to validate postgis extentions where successfully installed.
 
 ### 4. Change your geofence service environment to match you database setup.
- - Open the GeoFence configuration override file *geofence/geofence-datasource-ovr.properties*
+ - Open the GeoFence configuration override file *./geofence/geofence-datasource-ovr.properties*
  - Adjust the required database settings to match your postgis service
  - For help go to [Geofence configuration help](https://github.com/geoserver/geofence/wiki/GeoFence-configuration)
 
