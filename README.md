@@ -20,9 +20,8 @@ The installation follows the following steps:
 
 ### 1. Pull the repository:
 Choose a suitable directory and clone the repository:
-```
-$ git clone https://github.com/Terranex/docker-geoserver-geofence.git
-```
+
+`$ git clone https://github.com/Terranex/docker-geoserver-geofence.git`
 
 ### 2. Start the postgis service:
 `$ docker-compose up -d postgis`
@@ -43,9 +42,8 @@ $ exit
 
 Your database is now set up and ready. 
 Try logging in as `geofence`:
-```
-psql -U geofence
-```
+
+`psql -U geofence`
 Now run `SELECT PostGIS_Version();` to validate postgis extentions where successfully installed.
 For additional help customizing this service visit [PostgreSQL and PostGIS in a Docker container](https://hub.docker.com/r/cheewai/postgis/)
 
