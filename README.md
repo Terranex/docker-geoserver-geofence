@@ -9,7 +9,9 @@ Implementation of GeoServer/Geofence ready for deployment in a containerized env
 ## Installation
 The default installation assumes you either have or is going to use a PostGIS database for GeoFence data storage. 
 If you want to use the default H2 database, comment out the postgis service in the docker-compose.yml file before you start the container ecosystem.
+
 The installation follows the following steps:
+
 1. Pull the repository.
 2. Start the postgis service.
 3. Create a PostGIS enabled database with the associated user.
