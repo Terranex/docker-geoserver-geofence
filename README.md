@@ -2,7 +2,7 @@
 Implementation of GeoServer/Geofence ready for deployment in a containerized environment.
 
 ## Dependancies
-### This repository requires the following to run:
+##### This repository requires the following to run:
 - [docker](https://docs.docker.com/linux/step_one/)
 - [docker-compose](https://docs.docker.com/compose/install/)
 
