@@ -3,8 +3,8 @@ Implementation of GeoServer/Geofence ready for deployment in a containerized env
 
 ## Dependancies
 ### This repository requires the following to run:
-- docker
-- docker-compose
+- [docker](https://docs.docker.com/linux/step_one/)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
 ## Installation
 The default installation assumes you either have or is going to use a PostGIS database for GeoFence data storage. 
