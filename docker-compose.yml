@@ -41,7 +41,7 @@ services:
 
     volumes:
       # Mount your data directory so your database may be persisted
-      - /home/postgis/data:/var/lib/postgresql/data
+      - ./postgis/data:/var/lib/postgresql/data
       #*** If you have no existing database, comment the following the first-run
       #*** Empty data directory triggers initdb to be run
       # Customize access control to overwrite the default
