@@ -47,6 +47,7 @@ Try logging in as `geofence`:
 psql -U geofence
 ```
 Now run `SELECT PostGIS_Version();` to validate postgis extentions where successfully installed.
+For additional help customizing this service visit [PostgreSQL and PostGIS in a Docker container](https://hub.docker.com/r/cheewai/postgis/)
 
 ### 4. Change your geofence service environment to match you database setup.
  - Open the GeoFence configuration override file *./geofence/geofence-datasource-ovr.properties*
