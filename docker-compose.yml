@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  geoserver:
+    build: 
+      context: geoserver/
+      args:
+        GS_DOWNLOAD_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.8.3/geoserver-2.8.3-war.zip
+        GS_PROBE_DOWNLOAD_URL: http://ares.boundlessgeo.com/geoserver/2.8.x/community-latest/geoserver-2.8-SNAPSHOT-geofence-plugin.zip
+    env_file: ./geoserver/ENV      
+    links:
+      - geofence
+      - postgis
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./geoserver/data:/var/geoserver/data
+  geofence:
+    build: 
+      context: geofence/
+      args:
+        GF_DOWNLOAD_URL: http://ares.boundlessgeo.com/geofence/master/geofence-master-latest-war.zip
+        PG_SPATIAL_DOWNLOAD_URL: http://www.hibernatespatial.org/repository/org/hibernatespatial/hibernate-spatial-postgis/1.1.1/hibernate-spatial-postgis-1.1.1.jar
+    env_file: ./geofence/ENV
+    ports:
+      - '80:8080'
+    links:
+      - postgis
+    #environment:
+    #  - JAVA_OPTS="-Dgeofence-ovr=file:/usr/local/tomcat/conf/gf-ovr.properties"
+    volumes:
+      #/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
+      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat/conf/gf-ovr.properties
+      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
+  postgis:
+    image: cheewai/postgis
+    # Refer to https://hub.docker.com/_/postgres/ for other possibilities
+    env_file: ./postgis/ENV
+    ports:
+      - "5432:5432"
+
+    volumes:
+      # Mount your data directory so your database may be persisted
+      - /home/postgis/data:/var/lib/postgresql/data
+      #*** If you have no existing database, comment the following the first-run
+      #*** Empty data directory triggers initdb to be run
+      # Customize access control to overwrite the default
+      #- path/to/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf:ro
+      # Customize server tuning parameters to overwrite the default
+      #- path/to/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:ro

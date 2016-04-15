@@ -1,0 +1,2 @@
+#Add environment variables here
+GEOSERVER_DATA_DIR=/var/geoserver

@@ -1,0 +1,5 @@
+#Add environment variables here
+PGDATA=/var/lib/postgresql/data
+POSTGRES_PASSWORD=pgadmin
+POSTGRES_USER=postgres
+
