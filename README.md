@@ -1,5 +1,5 @@
 # docker-geoserver-geofence
-Implementation of GeoServer/Geofence ready for deployment in a containerized environment.
+Implementation of GeoServer/Geofence ready for deployment in a containerized environment with minimal setup.
 
 ## Dependancies
 ##### This repository requires the following to run:
