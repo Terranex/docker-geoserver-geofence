@@ -14,7 +14,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./geoserver/data:/var/geoserver/data
+      - ./geoserver/data:/var/geoserver
   geofence:
     build: 
       context: geofence/
@@ -30,8 +30,8 @@ services:
     #  - JAVA_OPTS="-Dgeofence-ovr=file:/usr/local/tomcat/conf/gf-ovr.properties"
     volumes:
       #/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
-      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat/conf/gf-ovr.properties
-      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
+      #- ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat7/conf/gf-ovr.properties
+      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat7/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
   postgis:
     image: cheewai/postgis
     # Refer to https://hub.docker.com/_/postgres/ for other possibilities
