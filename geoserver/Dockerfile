@@ -12,7 +12,7 @@ LABEL GeoServerProbeURL=$GS_PROBE_DOWNLOAD_URL
 
 RUN apk update \
     && apk upgrade \
-    && apk add curl zip
+    && apk add curl zip $(apk search -q ttf- | grep -v '\-doc')
 
 #Uncomment below is you have the geoserver war locally
 #COPY geoserver.war /tmp/geoserver.war

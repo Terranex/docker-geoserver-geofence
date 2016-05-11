@@ -5,14 +5,15 @@ services:
     build: 
       context: geoserver/
       args:
-        GS_DOWNLOAD_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.8.3/geoserver-2.8.3-war.zip
-        GS_PROBE_DOWNLOAD_URL: http://ares.boundlessgeo.com/geoserver/2.8.x/community-latest/geoserver-2.8-SNAPSHOT-geofence-plugin.zip
+        GS_DOWNLOAD_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.9-RC1/geoserver-2.9-RC1-war.zip
+        GS_PROBE_DOWNLOAD_URL: http://ares.boundlessgeo.com/geoserver/2.9.x/community-latest/geoserver-2.9-SNAPSHOT-geofence-plugin.zip
     env_file: ./geoserver/ENV      
     links:
       - geofence
       - postgis
     ports:
-      - '8080:8080'
+      - '8001:8080'
+      - '8501:8443'
     volumes:
       - ./geoserver/data:/var/geoserver
   geofence:
@@ -23,7 +24,8 @@ services:
         PG_SPATIAL_DOWNLOAD_URL: http://www.hibernatespatial.org/repository/org/hibernatespatial/hibernate-spatial-postgis/1.1.1/hibernate-spatial-postgis-1.1.1.jar
     env_file: ./geofence/ENV
     ports:
-      - '80:8080'
+      - '8002:8080'
+      - '8502:8443'
     links:
       - postgis
     #environment:
