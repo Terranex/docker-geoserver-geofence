@@ -55,6 +55,13 @@ For additional help customizing this service visit [PostgreSQL and PostGIS in a 
 ### 5. Launch the remaining geoserver & geofence services.
 `$ docker-compose up -d`
 
+### 6. Configure Geofence extension in Geoserver
+
+ - Log in to Geoserver web admin interface (default credentials *admin:geoserver*)
+ - Go to Security-GeoFence to edit "GeoFence services URL": `http://geofence:8080/geofence/remoting/RuleReader`
+ - Click "Test Connection" button and it should display success
+ - Restart Geoserver `docker-compose restart geoserver`
+
 
 ## Other
 Environment variables per service are stored in a ENV file in each of the service directories, i.e.
