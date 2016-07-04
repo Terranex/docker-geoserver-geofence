@@ -1,4 +1,9 @@
 #Exclude geoserver data dir
 /geoserver/data
 
+*/target/
+*/runtime/
 
+*/mvn_cache/
+
+*.crt

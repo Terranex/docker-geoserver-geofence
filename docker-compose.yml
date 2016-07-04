@@ -1,16 +1,6 @@
 version: '2'
 
 services:
-  cas:
-    image: tb4mmaggots/tomcat
-    env_file: ./cas/ENV
-    ports:
-      - '8080:8080'
-      - '8443:8443'
-    volumes:
-      - ./cas:/var/cas
-      - ./cas/build/target/cas.war:/usr/local/tomcat7/webapps/cas.war
-      - ./cas/server.xml:/usr/local/tomcat7/conf/server.xml
   geoserver:
     build: 
       context: geoserver/
@@ -32,8 +22,10 @@ services:
     ports:
       - '8001:8080'
       - '8501:8443'
-    #volumes:
-    #  - ./geoserver/data:/var/geoserver
+    volumes:
+      #- ./geoserver/data:/var/geoserver
+      - ./geoserver/server.xml:/usr/local/tomcat7/conf/server.xml
+      - ./geoserver/runtime:/runtime/data
   geofence:
     build: 
       context: geofence/
@@ -52,6 +44,7 @@ services:
       #/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
       #- ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat7/conf/gf-ovr.properties
       - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat7/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
+      - ./geofence/runtime:/runtime/data
   postgis:
     image: cheewai/postgis
     # Refer to https://hub.docker.com/_/postgres/ for other possibilities
@@ -62,6 +55,7 @@ services:
     volumes:
       # Mount your data directory so your database may be persisted
       - ./postgis/data:/var/lib/postgresql/data
+      - ./postgis/runtime:/runtime/data
       #*** If you have no existing database, comment the following the first-run
       #*** Empty data directory triggers initdb to be run
       # Customize access control to overwrite the default
