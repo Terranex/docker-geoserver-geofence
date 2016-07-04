@@ -8,7 +8,7 @@ LABEL PostGISHibernateSpatial=$PG_SPATIAL_DOWNLOAD_URL
 
 RUN apk update \
  && apk upgrade \
- && apk add curl
+ && apk add --no-cache curl
 
 #Uncomment if geofence WAR is local
 #COPY geofence.war /usr/local/tomcat7/webapps/
@@ -24,3 +24,6 @@ RUN unzip /tmp/geofence.zip -d /tmp/ \
 
 #Add Hibernate spatial lib for PostGIS to geofence
 RUN wget -P /usr/local/tomcat7/webapps/geofence/WEB-INF/lib/ $PG_SPATIAL_DOWNLOAD_URL
+
+#Cleanup
+RUN rm -rf /tmp/*

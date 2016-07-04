@@ -1,12 +1,30 @@
 version: '2'
 
 services:
+  cas:
+    image: tb4mmaggots/tomcat
+    env_file: ./cas/ENV
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+    volumes:
+      - ./cas:/var/cas
+      - ./cas/build/target/cas.war:/usr/local/tomcat7/webapps/cas.war
+      - ./cas/server.xml:/usr/local/tomcat7/conf/server.xml
   geoserver:
     build: 
       context: geoserver/
       args:
-        GS_DOWNLOAD_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.9-RC1/geoserver-2.9-RC1-war.zip
-        GS_PROBE_DOWNLOAD_URL: http://ares.boundlessgeo.com/geoserver/2.9.x/community-latest/geoserver-2.9-SNAPSHOT-geofence-plugin.zip
+        # 2.9-RC1
+        #GS_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.9-RC1/geoserver-2.9-RC1-war.zip
+        #GS_GF_PROBE_URL: http://ares.boundlessgeo.com/geoserver/2.9.x/community-latest/geoserver-2.9-SNAPSHOT-geofence-plugin.zip
+        #GS_CAS_URL: http://ares.boundlessgeo.com/geoserver/2.9.x/ext-latest/geoserver-2.9-SNAPSHOT-cas-plugin.zip
+
+        # 2.8.3
+        GS_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.8.3/geoserver-2.8.3-war.zip
+        GS_GF_PROBE_URL: http://ares.boundlessgeo.com/geoserver/2.8.x/community-latest/geoserver-2.8-SNAPSHOT-geofence-plugin.zip
+        GS_CAS_URL: https://sourceforge.net/projects/geoserver/files/GeoServer/2.8.3/extensions/geoserver-2.8.3-cas-plugin.zip/download
+
     env_file: ./geoserver/ENV      
     links:
       - geofence
@@ -14,8 +32,8 @@ services:
     ports:
       - '8001:8080'
       - '8501:8443'
-    volumes:
-      - ./geoserver/data:/var/geoserver
+    #volumes:
+    #  - ./geoserver/data:/var/geoserver
   geofence:
     build: 
       context: geofence/
