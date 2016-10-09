@@ -2,49 +2,31 @@ version: '2'
 
 services:
   geoserver:
-    build: 
-      context: geoserver/
-      args:
-        # 2.9-RC1
-        #GS_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.9-RC1/geoserver-2.9-RC1-war.zip
-        #GS_GF_PROBE_URL: http://ares.boundlessgeo.com/geoserver/2.9.x/community-latest/geoserver-2.9-SNAPSHOT-geofence-plugin.zip
-        #GS_CAS_URL: http://ares.boundlessgeo.com/geoserver/2.9.x/ext-latest/geoserver-2.9-SNAPSHOT-cas-plugin.zip
-
-        # 2.8.3
-        GS_URL: http://sourceforge.net/projects/geoserver/files/GeoServer/2.8.3/geoserver-2.8.3-war.zip
-        GS_GF_PROBE_URL: http://ares.boundlessgeo.com/geoserver/2.8.x/community-latest/geoserver-2.8-SNAPSHOT-geofence-plugin.zip
-        GS_CAS_URL: https://sourceforge.net/projects/geoserver/files/GeoServer/2.8.3/extensions/geoserver-2.8.3-cas-plugin.zip/download
-
-    env_file: ./geoserver/ENV      
+    image: tb4mmaggots/geoserver:2.8.5
+    # build:
+    #   context: geoserver/
+    #   args:
+    #     GS_VERSION: 2.8.5
+    env_file: ./geoserver/ENV
     links:
       - geofence
       - postgis
     ports:
       - '8001:8080'
-      - '8501:8443'
     volumes:
-      #- ./geoserver/data:/var/geoserver
-      - ./geoserver/server.xml:/usr/local/tomcat7/conf/server.xml
-      - ./geoserver/runtime:/runtime/data
+      - ./geoserver/data:/var/geoserver
+      # - ./geoserver/server.xml:/usr/local/tomcat/conf/server.xml
   geofence:
-    build: 
-      context: geofence/
-      args:
-        GF_DOWNLOAD_URL: http://ares.boundlessgeo.com/geofence/master/geofence-master-latest-war.zip
-        PG_SPATIAL_DOWNLOAD_URL: http://www.hibernatespatial.org/repository/org/hibernatespatial/hibernate-spatial-postgis/1.1.1/hibernate-spatial-postgis-1.1.1.jar
+    image: tb4mmaggots/geofence
+    # build:
+    #   context: geofence/
     env_file: ./geofence/ENV
     ports:
       - '8002:8080'
-      - '8502:8443'
     links:
       - postgis
-    #environment:
-    #  - JAVA_OPTS="-Dgeofence-ovr=file:/usr/local/tomcat/conf/gf-ovr.properties"
     volumes:
-      #/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
-      #- ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat7/conf/gf-ovr.properties
-      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat7/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
-      - ./geofence/runtime:/runtime/data
+      - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
   postgis:
     image: cheewai/postgis
     # Refer to https://hub.docker.com/_/postgres/ for other possibilities
