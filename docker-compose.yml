@@ -3,10 +3,6 @@ version: '2'
 services:
   geoserver:
     image: tb4mmaggots/geoserver:2.8.5
-    # build:
-    #   context: geoserver/
-    #   args:
-    #     GS_VERSION: 2.8.5
     env_file: ./geoserver/ENV
     links:
       - geofence
@@ -18,8 +14,6 @@ services:
       # - ./geoserver/server.xml:/usr/local/tomcat/conf/server.xml
   geofence:
     image: tb4mmaggots/geofence
-    # build:
-    #   context: geofence/
     env_file: ./geofence/ENV
     ports:
       - '8002:8080'
