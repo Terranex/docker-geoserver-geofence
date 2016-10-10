@@ -22,7 +22,7 @@ services:
     volumes:
       - ./geofence/geofence-datasource-ovr.properties:/usr/local/tomcat/webapps/geofence/WEB-INF/classes/geofence-datasource-ovr.properties
   postgis:
-    image: cheewai/postgis
+    image: cheewai/postgis:postgres-9.5
     # Refer to https://hub.docker.com/_/postgres/ for other possibilities
     env_file: ./postgis/ENV
     ports:
@@ -31,7 +31,6 @@ services:
     volumes:
       # Mount your data directory so your database may be persisted
       - ./postgis/data:/var/lib/postgresql/data
-      - ./postgis/runtime:/runtime/data
       #*** If you have no existing database, comment the following the first-run
       #*** Empty data directory triggers initdb to be run
       # Customize access control to overwrite the default
